@@ -3,12 +3,12 @@
 from pathlib import Path
 
 SRC = Path(__file__).parent.resolve()
-ROOT = SRC.joinpath("..", "..").resolve()
+BLD = SRC.joinpath("..", "..", "bld").resolve()
 
-BLD = ROOT.joinpath("bld").resolve()
+TEST_DIR = SRC.joinpath("..", "..", "tests").resolve()
+PAPER_DIR = SRC.joinpath("..", "..", "paper").resolve()
+DATA = SRC.joinpath("eaibgap", "..", "data").resolve()
 
+GROUPS = ["marital_status", "qualification"]
 
-DOCUMENTS = ROOT.joinpath("documents").resolve()
-
-TEMPLATE_GROUPS = ["marital_status", "highest_qualification"]
-
+__all__ = ["BLD", "SRC", "TEST_DIR", "PAPER_DIR", "DATA", "GROUPS"]
