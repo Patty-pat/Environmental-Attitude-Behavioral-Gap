@@ -16,3 +16,13 @@ def task_extract_json_to_xls_central_java(
     Pytask task to extract data from JSON to Excel.
     """
     facilities_data_json_to_xls(json_input, produces)
+
+@task
+def task_extract_json_to_xls_west_java(
+    json_input=SRC / "data" / "west_java.json",
+    produces=BLD / "data" / "west_java.xlsx",
+):
+    """
+    Pytask task to extract data from JSON to Excel.
+    """
+    facilities_data_json_to_xls(json_input, produces)
