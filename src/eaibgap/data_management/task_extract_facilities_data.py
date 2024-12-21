@@ -13,6 +13,7 @@ files = [
     ("east_java.json", "east_java.xlsx"),
     ("DKI_jakarta.json", "DKI_jakarta.xlsx"),
     ("DI_yogyakarta.json", "DI_yogyakarta.xlsx"),
+    ("banten.json", "banten.xlsx"),
 ]
 
 for json_file, excel_file in files:

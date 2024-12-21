@@ -15,15 +15,16 @@ def facilities_data_json_to_xls(json_input_path, output_xlsx_path):
     markers = data.get("markers", [])
     wb = Workbook()
     ws = wb.active
-    headers = ["Name", "Latitude", "Longitude", "Type"]
+    headers = ["Name", "Unit Number", "Latitude", "Longitude", "Type"]
     ws.append(headers)
 
     for marker in markers:
         row = [
             marker[0] if len(marker) > 0 else '',
+            marker[5] if len(marker) > 5 else '',
             marker[1] if len(marker) > 1 else '',
             marker[2] if len(marker) > 2 else '',
-            marker[3] if len(marker) > 3 else ''
+            marker[4] if len(marker) > 4 else ''
         ]
         ws.append(row)
 
