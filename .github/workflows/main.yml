@@ -35,6 +35,11 @@ jobs:
           create-args: python=${{ matrix.python-version }}
           cache-environment: true
           micromamba-version: 1.5.6-0
+      - name: Debug Micromamba Environment
+        run: |
+          micromamba activate eaibgap
+          micromamba list
+          python --version
       - name: Run full test suite on MacOS and Linux
         shell: bash -l {0}
         run: |
