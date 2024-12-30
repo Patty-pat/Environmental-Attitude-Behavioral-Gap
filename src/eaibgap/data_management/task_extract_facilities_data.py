@@ -27,4 +27,4 @@ for json_file, excel_file in files:
         """
         # Ensure output directory exists
         produces.parent.mkdir(parents=True, exist_ok=True)
-        facilities_data_json_to_xls(json_input, produces)
+        facilities_data_json_to_xls(json_input, produces) 
