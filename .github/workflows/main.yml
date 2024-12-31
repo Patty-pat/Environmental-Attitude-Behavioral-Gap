@@ -28,22 +28,32 @@ jobs:
           tlmgr update --self
           tlmgr install a4wide beamer biber biblatex caption eurosym grfext minibox moreverb ntgclass relsize setspace xfrac
           tlmgr list --only-installed
+      - name: Set up Miniforge
+        run: |
+          if [[ $RUNNER_OS == "Linux" ]]; then
+            wget https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-x86_64.sh -O miniforge.sh
+          elif [[ $RUNNER_OS == "macOS" ]]; then
+            wget https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-MacOSX-arm64.sh -O miniforge.sh
+          elif [[ $RUNNER_OS == "Windows" ]]; then
+            curl -L -o miniforge.exe https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Windows-x86_64.exe
+            echo "Miniforge setup complete for Windows"
+            exit 0
+          fi
+          bash miniforge.sh -b -p $HOME/miniforge
+          echo "$HOME/miniforge/bin" >> $GITHUB_PATH
+          source $HOME/miniforge/bin/activate
+          conda init bash
       - name: Install Mamba and Environment
         run: |
-          # Install mamba
+          source $HOME/miniforge/bin/activate
           conda install -n base -c conda-forge mamba
-          # Create the environment
           mamba env create -f environment.yml
-          # List the environment for debugging
-          mamba env list
-      - name: Activate Environment and Verify Python
-        shell: bash -l {0}
-        run: |
-          source activate eaibgap
+          conda activate eaibgap
           python --version
       - name: Run full test suite on MacOS and Linux
         shell: bash -l {0}
         run: |
+          source $HOME/miniforge/bin/activate
           source activate eaibgap
           pytest -v --cov=./ --cov-report=xml
         if: runner.os != 'Windows'
